@@ -1,19 +1,15 @@
-import styles from './App.module.css';
-import { useStore } from './store';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomeContainer from './containers/HomeContainer';
+import QuizContainer from './containers/QuizContainer';
 
 function App() {
-    const theme = useStore((state) => state.theme);
-    const setTheme = useStore((state) => state.setTheme);
-
-    const handleClickThemeButton = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
-    };
     return (
-        <div>
-            {theme}
-            <button onClick={handleClickThemeButton}>toggleTheme</button>
-            <div className={styles.container}>i`m dobby!</div>;
-        </div>
+        <Router>
+            <Routes>
+                <Route path={'/'} element={<HomeContainer />} />
+                <Route path={'/quiz'} element={<QuizContainer />} />
+            </Routes>
+        </Router>
     );
 }
 
