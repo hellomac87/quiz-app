@@ -7,17 +7,23 @@ import Quiz from 'src/components/quiz';
 
 function QuizContainer() {
     const [quiz, setQuiz] = useState<QuizType[] | null>(null);
-    useEffect(() => {
+
+    const loadQuiz = async () => {
         const params: QuizParams = {
             amount: 10,
             category: 21,
             difficulty: 'easy',
             type: 'multiple',
         };
-        void getQuiz(params).then((res) => {
-            console.log(res.data);
+        try {
+            const res = await getQuiz(params);
             setQuiz(res.data.results);
-        });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        void loadQuiz();
     }, []);
     return <Quiz />;
 }
