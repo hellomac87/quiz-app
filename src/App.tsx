@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomeContainer from './containers/HomeContainer';
-import QuizContainer from './containers/QuizContainer';
+
+import HomeContainer from 'src/containers/HomeContainer';
+import QuizContainer from 'src/containers/QuizContainer';
 
 function App() {
     return (
