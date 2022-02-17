@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
-import { routes } from '../../constants/routes';
-
-import Home from '../../components/home';
+import { routes } from 'src/constants/routes';
+import Home from 'src/components/home';
 
 function HomeContainer() {
     const navigate = useNavigate();
