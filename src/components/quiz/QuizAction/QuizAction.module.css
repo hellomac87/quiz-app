@@ -1,0 +1,7 @@
+.container {
+    @apply flex justify-center mt-20;
+
+    button {
+        @apply border border-yellow-50;
+    }
+}

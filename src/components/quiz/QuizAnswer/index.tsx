@@ -1,20 +1,21 @@
+import { useMemo } from 'react';
+import { suffleQuiz } from 'src/libs/quiz';
 import { QuizType } from 'src/types/quiz';
 
-import styles from './quiz.module.css';
+import styles from './QuizAnswer.module.css';
 
 type Props = {
-    quiz?: QuizType;
+    quiz: QuizType;
+    onClickAnswer(answer: string): void;
 };
 
-function Quiz({ quiz }: Props) {
-    if (!quiz) {
-        return <div>loading...</div>;
-    }
-
-    const answers = suffle<string>([...quiz.incorrect_answers, quiz.correct_answer]);
+function QuizAnswer({ quiz, onClickAnswer }: Props) {
+    const answers = useMemo(() => {
+        return suffleQuiz<string>([...quiz.incorrect_answers, quiz.correct_answer]);
+    }, [quiz]);
 
     const handleClickAnswer = (answer: string) => () => {
-        console.log(answer);
+        onClickAnswer(answer);
     };
 
     return (
@@ -36,11 +37,4 @@ function Quiz({ quiz }: Props) {
     );
 }
 
-export default Quiz;
-
-function suffle<T>(array: T[]) {
-    return array
-        .map((value) => ({ value, sort: Math.random() }))
-        .sort((a, b) => a.sort - b.sort)
-        .map(({ value }) => value);
-}
+export default QuizAnswer;
