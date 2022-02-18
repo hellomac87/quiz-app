@@ -6,7 +6,10 @@ import { QuizParams, QuizType } from 'src/types/quiz';
 import Quiz from 'src/components/quiz';
 
 function QuizContainer() {
-    const [quiz, setQuiz] = useState<QuizType[] | null>(null);
+    const [quizzes, setQuizzes] = useState<QuizType[] | null>(null);
+    const [step, setStep] = useState(0);
+
+    const currentQuiz = quizzes?.[step];
 
     const loadQuiz = async () => {
         const params: QuizParams = {
@@ -17,7 +20,7 @@ function QuizContainer() {
         };
         try {
             const res = await getQuiz(params);
-            setQuiz(res.data.results);
+            setQuizzes(res.data.results);
         } catch (error) {
             console.error(error);
         }
@@ -25,7 +28,8 @@ function QuizContainer() {
     useEffect(() => {
         void loadQuiz();
     }, []);
-    return <Quiz />;
+
+    return <Quiz quiz={currentQuiz} />;
 }
 
 export default QuizContainer;
