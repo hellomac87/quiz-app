@@ -29,7 +29,11 @@ function QuizContainer() {
         void loadQuiz();
     }, []);
 
-    return <Quiz quiz={currentQuiz} />;
+    return (
+        <>
+            <Quiz quiz={currentQuiz} />
+        </>
+    );
 }
 
 export default QuizContainer;

@@ -1,5 +1,7 @@
 import { QuizType } from 'src/types/quiz';
 
+import styles from './quiz.module.css';
+
 type Props = {
     quiz?: QuizType;
 };
@@ -17,13 +19,13 @@ function Quiz({ quiz }: Props) {
 
     return (
         <div>
-            <div>{quiz.category}</div>
-            <div>{quiz.question}</div>
-            <ul>
+            <h1>{quiz.category}</h1>
+            <h2 className={styles.question}>{quiz.question}</h2>
+            <ul className={styles.answers}>
                 {answers.map((answer, index) => {
                     const number = `${index + 1}. `;
                     return (
-                        <li key={index} onClick={handleClickAnswer(answer)}>
+                        <li key={index} onClick={handleClickAnswer(answer)} className={styles.answer}>
                             {number}
                             {answer}
                         </li>
