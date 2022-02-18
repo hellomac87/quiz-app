@@ -8,6 +8,9 @@ module.exports = {
                 flexbox: 'no-2009',
             },
             stage: 0,
+            features: {
+                'nesting-rules': true,
+            },
         }),
         postcssNormalize(),
     ],

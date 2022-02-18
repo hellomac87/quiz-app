@@ -1,15 +1,20 @@
 import create from 'zustand';
 
-export type ThemeType = 'dark' | 'light' | 'system';
-
-export type GlobalStateType = {
-    theme: ThemeType;
-    setTheme(theme: ThemeType): void;
+export type Answer = {
+    value: string;
+    status: boolean;
 };
 
-const defaultTheme: ThemeType = 'dark';
+export type GlobalStateType = {
+    myAnswersHistory: Array<Answer>;
+    setMyAnswersHistory(answer: Answer): void;
+};
 
 export const useStore = create<GlobalStateType>((set) => ({
-    theme: defaultTheme,
-    setTheme: (theme: ThemeType) => set((_) => ({ theme })),
+    myAnswersHistory: [],
+    setMyAnswersHistory: (answer: Answer) =>
+        set((state) => ({
+            ...state,
+            myAnswersHistory: [...state.myAnswersHistory, answer],
+        })),
 }));

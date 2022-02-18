@@ -8,7 +8,6 @@ function HomeContainer() {
 
     const handleClickStart = () => {
         navigate(routes.quiz);
-        console.log('handleClickStart');
     };
 
     return <Home onClick={handleClickStart} />;
