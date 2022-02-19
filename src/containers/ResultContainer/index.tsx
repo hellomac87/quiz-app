@@ -1,7 +1,8 @@
-import ResultCorrctAmount from 'src/components/result/ResultCorrectAmount';
-import ResultTime from 'src/components/result/ResultTime';
-import { getHHMMSSFromSeconds } from 'src/libs/result';
 import { useStore } from 'src/store';
+import { getHHMMSSFromSeconds } from 'src/libs/result';
+
+import ResultTime from 'src/components/result/ResultTime';
+import ResultCorrctAmount from 'src/components/result/ResultCorrectAmount';
 
 function ResultContainer() {
     const { seconds, myAnswersHistory } = useStore((state) => state);
