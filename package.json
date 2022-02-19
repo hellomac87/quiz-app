@@ -50,6 +50,8 @@
         "autoprefixer": "^9",
         "craco-alias": "^3.0.1",
         "postcss": "^7",
+        "postcss-import": "^14.0.2",
+        "postcss-nesting": "^10.1.2",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat"
     }
 }

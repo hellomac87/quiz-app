@@ -1,7 +1,9 @@
 .container {
-    @apply flex justify-center;
+    @apply flex items-center justify-center max-w-lg mx-auto;
+}
 
-    button {
-        @apply border border-yellow-50;
-    }
+.button {
+    @apply w-full flex items-center justify-center rounded-2xl bg-white py-4 px-6;
+
+    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
 }

@@ -3,15 +3,23 @@ import styles from './QuizAction.module.css';
 type Props = {
     displayNext: boolean;
     onClickNext: () => void;
+    displayLast: boolean;
+    onClickLast: () => void;
 };
 
-function QuizAction({ displayNext, onClickNext }: Props) {
-    if (!displayNext) {
+function QuizAction({ displayNext, onClickNext, displayLast, onClickLast }: Props) {
+    const handleClick = () => {
+        displayNext ? onClickNext() : onClickLast();
+    };
+    if (!displayNext && !displayLast) {
         return null;
     }
     return (
         <div className={styles.container}>
-            <button onClick={onClickNext}>Next Quiz</button>
+            <button onClick={handleClick} className={styles.button}>
+                {displayNext && 'Next Quiz'}
+                {displayLast && 'Show Result'}
+            </button>
         </div>
     );
 }
