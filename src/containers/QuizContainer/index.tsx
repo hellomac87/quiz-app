@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAsync, useToggle } from 'react-use';
+import { useAsync } from 'react-use';
 
 import { Answer, useStore } from 'src/store';
 import { getQuiz } from 'src/api/quiz';
@@ -7,17 +7,20 @@ import { QuizParams, QuizType } from 'src/types/quiz';
 
 import QuizAnswer from 'src/components/quiz/QuizAnswer';
 import QuizAction from 'src/components/quiz/QuizAction';
+import QuizResult from 'src/components/quiz/QuizResult';
 
 const AMOUNT = 10;
 
 function QuizContainer() {
     const { myAnswersHistory, setMyAnswersHistory } = useStore((state) => state);
-    const [quizzes, setQuizzes] = useState<QuizType[] | null>(null);
+    const [quizzes, setQuizzes] = useState<QuizType[]>();
     const [step, setStep] = useState(0);
 
+    const lastQuiz = step === AMOUNT - 1;
     const currentQuiz = quizzes?.[step];
-    const currentMyAnswer = myAnswersHistory[step];
-    const displayNext = Boolean(currentMyAnswer);
+    const currentMyAnswer = myAnswersHistory[step] as Answer | undefined;
+    const currentResult = currentMyAnswer?.correct;
+    const displayNext = Boolean(currentMyAnswer) && !lastQuiz;
 
     const loadQuiz = async () => {
         const params: QuizParams = {
@@ -39,7 +42,7 @@ function QuizContainer() {
 
         const myAnswer: Answer = {
             value: answer,
-            status: answer === currentQuiz.correct_answer,
+            correct: answer === currentQuiz.correct_answer,
         };
 
         setMyAnswersHistory(myAnswer);
@@ -51,7 +54,6 @@ function QuizContainer() {
 
     useAsync(async () => {
         await loadQuiz();
-        console.log('asdf');
     });
 
     if (!currentQuiz) {
@@ -61,6 +63,7 @@ function QuizContainer() {
     return (
         <>
             <QuizAnswer quiz={currentQuiz} onClickAnswer={handleClickAnswer} />
+            <QuizResult currentResult={currentResult} />
             <QuizAction displayNext={displayNext} onClickNext={handleClickNext} />
         </>
     );

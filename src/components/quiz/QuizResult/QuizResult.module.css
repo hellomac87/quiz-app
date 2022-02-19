@@ -1,0 +1,13 @@
+.container {
+    @apply flex items-center justify-center max-w-lg mx-auto py-4 px-6 rounded-2xl bg-white;
+
+    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+}
+
+.correct {
+    @apply bg-blue-200;
+}
+
+.incorrect {
+    @apply bg-pink-200;
+}

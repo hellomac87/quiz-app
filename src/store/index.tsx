@@ -2,15 +2,15 @@ import create from 'zustand';
 
 export type Answer = {
     value: string;
-    status: boolean;
+    correct: boolean;
 };
 
-export type GlobalStateType = {
+export type GlobalState = {
     myAnswersHistory: Array<Answer>;
     setMyAnswersHistory(answer: Answer): void;
 };
 
-export const useStore = create<GlobalStateType>((set) => ({
+export const useStore = create<GlobalState>((set) => ({
     myAnswersHistory: [],
     setMyAnswersHistory: (answer: Answer) =>
         set((state) => ({

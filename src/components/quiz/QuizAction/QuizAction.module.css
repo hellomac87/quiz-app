@@ -1,5 +1,5 @@
 .container {
-    @apply flex justify-center mt-20;
+    @apply flex justify-center;
 
     button {
         @apply border border-yellow-50;
