@@ -1,12 +1,14 @@
 import { useMemo } from 'react';
-import Card from 'src/components/common/Card';
+
+import { Quiz } from 'src/types/quiz';
 import { suffleQuiz } from 'src/libs/quiz';
-import { QuizType } from 'src/types/quiz';
+
+import Card from 'src/components/common/Card';
 
 import styles from './QuizAnswer.module.css';
 
 type Props = {
-    quiz: QuizType;
+    quiz: Quiz;
     onClickAnswer(answer: string): void;
 };
 

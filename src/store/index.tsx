@@ -1,41 +1,25 @@
-import { QuizType } from 'src/types/quiz';
 import create from 'zustand';
+
+import { createMyAnswerSlice, MyAnswerType } from 'src/store/mySlice';
+import { createQuizSlice, QuizType } from 'src/store/quizSlice';
 
 export type Answer = {
     value: string;
     correct: boolean;
 };
 
-export type GlobalState = {
-    quizzes: QuizType[];
-    setQuizzes(quizzes: QuizType[]): void;
-    myAnswersHistory: Array<Answer>;
-    setMyAnswersHistory(answer: Answer): void;
-    resetMyAnswerHistory(): void;
+export type StoreType = {
     seconds: number;
     setSeconds(time: number): void;
     isRetry: boolean;
     setIsRetry(flag: boolean): void;
-};
+} & MyAnswerType &
+    QuizType;
 
-export const useStore = create<GlobalState>((set) => ({
-    quizzes: [],
-    setQuizzes: (quizzes: QuizType[]) =>
-        set((state) => ({
-            ...state,
-            quizzes,
-        })),
-    myAnswersHistory: [],
-    setMyAnswersHistory: (answer: Answer) =>
-        set((state) => ({
-            ...state,
-            myAnswersHistory: [...state.myAnswersHistory, answer],
-        })),
-    resetMyAnswerHistory: () =>
-        set((state) => ({
-            ...state,
-            myAnswersHistory: [],
-        })),
+export const useStore = create<StoreType>((set, get) => ({
+    ...createQuizSlice(set, get),
+    ...createMyAnswerSlice(set, get),
+
     seconds: 0,
     setSeconds: (time: number) =>
         set((state) => ({

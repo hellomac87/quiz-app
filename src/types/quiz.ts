@@ -1,13 +1,13 @@
 export type QuizResponse = {
     data: {
         response_code: number;
-        results: QuizType[];
+        results: Quiz[];
     };
     status: 200;
     statusText: string;
 };
 
-export type QuizType = {
+export type Quiz = {
     category: string;
     correct_answer: string;
     difficulty: 'easy';
