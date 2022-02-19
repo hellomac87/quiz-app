@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useAsync } from 'react-use';
+import { useNavigate } from 'react-router-dom';
 
-import { Answer, useStore } from 'src/store';
 import { getQuiz } from 'src/api/quiz';
+import { Answer, useStore } from 'src/store';
+import { routes } from 'src/constants/routes';
 import { QuizParams, QuizType } from 'src/types/quiz';
 
 import QuizAnswer from 'src/components/quiz/QuizAnswer';
@@ -12,6 +14,7 @@ import QuizResult from 'src/components/quiz/QuizResult';
 const AMOUNT = 10;
 
 function QuizContainer() {
+    const navigate = useNavigate();
     const { myAnswersHistory, setMyAnswersHistory } = useStore((state) => state);
     const [quizzes, setQuizzes] = useState<QuizType[]>();
     const [step, setStep] = useState(0);
@@ -21,6 +24,7 @@ function QuizContainer() {
     const currentMyAnswer = myAnswersHistory[step] as Answer | undefined;
     const currentResult = currentMyAnswer?.correct;
     const displayNext = Boolean(currentMyAnswer) && !lastQuiz;
+    const displayLast = Boolean(currentMyAnswer) && lastQuiz;
 
     const loadQuiz = async () => {
         const params: QuizParams = {
@@ -52,6 +56,10 @@ function QuizContainer() {
         setStep(step + 1);
     };
 
+    const handleClickLast = () => {
+        navigate(routes.result);
+    };
+
     useAsync(async () => {
         await loadQuiz();
     });
@@ -64,7 +72,12 @@ function QuizContainer() {
         <>
             <QuizAnswer quiz={currentQuiz} onClickAnswer={handleClickAnswer} />
             <QuizResult currentResult={currentResult} />
-            <QuizAction displayNext={displayNext} onClickNext={handleClickNext} />
+            <QuizAction
+                displayNext={displayNext}
+                onClickNext={handleClickNext}
+                displayLast={displayLast}
+                onClickLast={handleClickLast}
+            />
         </>
     );
 }
