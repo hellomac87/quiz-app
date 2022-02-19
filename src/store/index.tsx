@@ -8,6 +8,8 @@ export type Answer = {
 export type GlobalState = {
     myAnswersHistory: Array<Answer>;
     setMyAnswersHistory(answer: Answer): void;
+    seconds: number;
+    setSeconds(time: number): void;
 };
 
 export const useStore = create<GlobalState>((set) => ({
@@ -16,5 +18,11 @@ export const useStore = create<GlobalState>((set) => ({
         set((state) => ({
             ...state,
             myAnswersHistory: [...state.myAnswersHistory, answer],
+        })),
+    seconds: 0,
+    setSeconds: (time: number) =>
+        set((state) => ({
+            ...state,
+            seconds: time,
         })),
 }));
