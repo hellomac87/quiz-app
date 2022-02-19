@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import Card from 'src/components/common/Card';
 import { suffleQuiz } from 'src/libs/quiz';
 import { QuizType } from 'src/types/quiz';
 
@@ -26,10 +27,10 @@ function QuizAnswer({ quiz, onClickAnswer }: Props) {
                 {answers.map((answer, index) => {
                     const number = `${index + 1}. `;
                     return (
-                        <li key={index} onClick={handleClickAnswer(answer)} className={styles.answer}>
+                        <Card key={index} onClick={handleClickAnswer(answer)} className={styles.answer}>
                             {number}
                             {answer}
-                        </li>
+                        </Card>
                     );
                 })}
             </ul>
