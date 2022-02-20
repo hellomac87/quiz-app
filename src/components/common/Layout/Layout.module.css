@@ -3,5 +3,5 @@
 }
 
 .header {
-    @apply flex items-center h-[80px] text-4xl text-primary500 font-bold mb-[80px];
+    @apply flex items-center h-[80px] text-4xl text-primary500 font-bold;
 }

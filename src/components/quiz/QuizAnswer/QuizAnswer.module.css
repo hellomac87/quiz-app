@@ -10,13 +10,13 @@
 }
 
 .answer {
-    @apply flex items-center px-6 py-4 cursor-pointer rounded-lg text-base;
+    @apply flex items-center justify-between px-6 py-4 cursor-pointer rounded-lg text-base transition-[background];
     @apply border border-gray-100;
     @apply hover:bg-gray-100;
 }
 .correct {
-    @apply bg-green-200;
+    @apply bg-green-200 hover:bg-green-200 text-primary500;
 }
 .incorrect {
-    @apply bg-red-200;
+    @apply bg-red-200 hover:bg-red-200 text-red-500;
 }

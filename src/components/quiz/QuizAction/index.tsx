@@ -19,8 +19,8 @@ function QuizAction({ displayNext, onClickNext, displayLast, onClickLast }: Prop
     return (
         <div className={styles.container}>
             <Button onClick={handleClick} variant={displayLast ? 'fill' : 'outline'} fullWidth>
-                {displayNext && 'Next Quiz'}
-                {displayLast && 'Show Result'}
+                {displayNext && '다음'}
+                {displayLast && '결과 보기'}
             </Button>
         </div>
     );
