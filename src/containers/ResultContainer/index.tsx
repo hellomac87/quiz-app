@@ -11,6 +11,7 @@ import ResultCorrctAmount from 'src/components/result/ResultCorrectAmount';
 import ResultChart from 'src/components/result/ResultChart';
 import ResultAction from 'src/components/result/ResultAction';
 import ResultCorrectionNote from 'src/components/result/ResultCorrectionNote';
+import { getHHMMSSFromSeconds } from 'src/libs/result';
 
 function ResultContainer() {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ function ResultContainer() {
         }
         const diffSeconds = dayjs(endTime).diff(dayjs(startTime), 's');
 
-        return dayjs(diffSeconds).format('HH:mm:ss');
+        return getHHMMSSFromSeconds(diffSeconds);
     };
 
     const time = getDuration(startTime, endTime);
