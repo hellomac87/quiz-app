@@ -7,6 +7,7 @@ import { Answer, useStore } from 'src/store';
 import { routes } from 'src/constants/routes';
 import { QuizParams } from 'src/types/quiz';
 
+import Layout from 'src/components/common/Layout';
 import QuizAnswer from 'src/components/quiz/QuizAnswer';
 import QuizAction from 'src/components/quiz/QuizAction';
 import QuizResult from 'src/components/quiz/QuizResult';
@@ -77,7 +78,7 @@ function QuizContainer() {
     }
 
     return (
-        <>
+        <Layout>
             <QuizAnswer quiz={currentQuiz} onClickAnswer={handleClickAnswer} />
             <QuizResult currentResult={currentResult} />
             <QuizAction
@@ -86,7 +87,7 @@ function QuizContainer() {
                 displayLast={displayLast}
                 onClickLast={handleClickLast}
             />
-        </>
+        </Layout>
     );
 }
 

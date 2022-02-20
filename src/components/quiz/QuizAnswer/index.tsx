@@ -22,9 +22,8 @@ function QuizAnswer({ quiz, onClickAnswer }: Props) {
     };
 
     return (
-        <div>
-            <h1>{quiz.category}</h1>
-            <h2 className={styles.question}>{quiz.question}</h2>
+        <div className={styles.container}>
+            <h1 className={styles.question}>{quiz.question}</h1>
             <ul className={styles.answers}>
                 {answers.map((answer, index) => {
                     const number = `${index + 1}. `;

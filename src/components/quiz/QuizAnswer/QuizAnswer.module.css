@@ -1,9 +1,12 @@
+.container {
+    @apply w-full;
+}
 .question {
-    @apply max-w-xl m-auto p-6 text-3xl text-center;
+    @apply w-full p-6 text-3xl text-center;
 }
 
 .answers {
-    @apply max-w-lg flex flex-wrap m-auto gap-4;
+    @apply flex flex-wrap gap-4;
 }
 
 .answer {

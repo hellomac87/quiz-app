@@ -1,5 +1,5 @@
 .container {
-    @apply flex items-center justify-center max-w-lg mx-auto;
+    @apply flex items-center justify-center;
 }
 
 .button {
