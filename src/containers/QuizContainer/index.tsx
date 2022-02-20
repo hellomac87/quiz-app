@@ -47,8 +47,10 @@ function QuizContainer() {
         if (!currentQuiz || currentMyAnswer) return;
 
         const myAnswer: Answer = {
-            value: answer,
+            myAnswer: answer,
             correct: answer === currentQuiz.correct_answer,
+            correct_answer: currentQuiz.correct_answer,
+            question: currentQuiz.question,
         };
 
         lastQuiz && setEndTime(new Date());

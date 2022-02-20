@@ -5,23 +5,24 @@ import dayjs from 'dayjs';
 import { routes } from 'src/constants/routes';
 import { useStore } from 'src/store';
 import { ChartData } from 'src/types/result';
-import { getHHMMSSFromSeconds } from 'src/libs/result';
 
 import ResultTime from 'src/components/result/ResultTime';
 import ResultCorrctAmount from 'src/components/result/ResultCorrectAmount';
 import ResultChart from 'src/components/result/ResultChart';
 import ResultAction from 'src/components/result/ResultAction';
+import ResultCorrectionNote from 'src/components/result/ResultCorrectionNote';
+import { getHHMMSSFromSeconds } from 'src/libs/result';
 
 function ResultContainer() {
     const navigate = useNavigate();
     const { myAnswersHistory, resetMyAnswerHistory, setIsRetry, startTime, endTime } = useStore((state) => state);
 
-    const correctAmount = myAnswersHistory.filter((answer) => answer.correct).length;
-    const incorrectAmount = myAnswersHistory.filter((answer) => !answer.correct).length;
+    const corrections = myAnswersHistory.filter((answer) => answer.correct);
+    const incorrections = myAnswersHistory.filter((answer) => !answer.correct);
 
     const chartData: ChartData[] = [
-        { name: 'correct', value: correctAmount },
-        { name: 'incorrect', value: incorrectAmount },
+        { name: 'correct', value: corrections.length },
+        { name: 'incorrect', value: incorrections.length },
     ];
 
     const getDuration = (startTime: Date | null, endTime: Date | null) => {
@@ -30,7 +31,7 @@ function ResultContainer() {
         }
         const diffSeconds = dayjs(endTime).diff(dayjs(startTime), 's');
 
-        return dayjs(diffSeconds).format('HH:mm:ss');
+        return getHHMMSSFromSeconds(diffSeconds);
     };
 
     const time = getDuration(startTime, endTime);
@@ -51,9 +52,10 @@ function ResultContainer() {
     return (
         <>
             <ResultTime time={time} />
-            <ResultCorrctAmount correctAmount={correctAmount} incorrectAmount={incorrectAmount} />
+            <ResultCorrctAmount correctAmount={corrections.length} incorrectAmount={incorrections.length} />
             <ResultChart chartData={chartData} />
             <ResultAction onClickRetry={retry} />
+            <ResultCorrectionNote incorrections={incorrections} />
         </>
     );
 }

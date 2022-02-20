@@ -5,8 +5,10 @@ import { createQuizSlice, QuizType } from 'src/store/quizSlice';
 import { createResultSlice, ResultType } from './resultSlice';
 
 export type Answer = {
-    value: string;
+    myAnswer: string;
+    correct_answer: string;
     correct: boolean;
+    question: string;
 };
 
 export type StoreType = {
