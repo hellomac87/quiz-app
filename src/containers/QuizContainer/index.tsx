@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useAsync } from 'react-use';
-import { useStopwatch } from 'react-timer-hook';
 import { useNavigate } from 'react-router-dom';
 
 import { getQuiz } from 'src/api/quiz';
@@ -16,8 +15,7 @@ const AMOUNT = 10;
 
 function QuizContainer() {
     const navigate = useNavigate();
-    const { seconds, start } = useStopwatch({ autoStart: true });
-    const { quizzes, setQuizzes, myAnswersHistory, setMyAnswersHistory, setSeconds, isRetry } = useStore(
+    const { quizzes, setQuizzes, myAnswersHistory, setMyAnswersHistory, isRetry, setStartTime, setEndTime } = useStore(
         (state) => state
     );
     const [step, setStep] = useState(0);
@@ -53,6 +51,8 @@ function QuizContainer() {
             correct: answer === currentQuiz.correct_answer,
         };
 
+        lastQuiz && setEndTime(new Date());
+
         setMyAnswersHistory(myAnswer);
     };
 
@@ -61,13 +61,12 @@ function QuizContainer() {
     };
 
     const handleClickLast = () => {
-        setSeconds(seconds);
         navigate(routes.result);
     };
 
     useAsync(async () => {
         if (isRetry && quizzes.length > 0) return;
-        start();
+        setStartTime(new Date());
         await loadQuiz();
     });
 

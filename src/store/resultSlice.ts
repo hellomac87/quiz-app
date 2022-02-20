@@ -10,7 +10,9 @@ export type ResultType = {
     resetTime(): void;
 };
 
-export const createMySlice = (set: SetState<StoreType>, get: GetState<StoreType>) => ({
+export const createResultSlice = (set: SetState<StoreType>, get: GetState<StoreType>) => ({
+    startTime: null,
+    endTime: null,
     setStartTime: (startTime: Date) =>
         set((state) => {
             return {
