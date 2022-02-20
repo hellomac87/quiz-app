@@ -7,9 +7,9 @@ import { Answer, useStore } from 'src/store';
 import { routes } from 'src/constants/routes';
 import { QuizParams } from 'src/types/quiz';
 
+import Layout from 'src/components/common/Layout';
 import QuizAnswer from 'src/components/quiz/QuizAnswer';
 import QuizAction from 'src/components/quiz/QuizAction';
-import QuizResult from 'src/components/quiz/QuizResult';
 
 const AMOUNT = 10;
 
@@ -23,7 +23,6 @@ function QuizContainer() {
     const lastQuiz = step === AMOUNT - 1;
     const currentQuiz = quizzes?.[step];
     const currentMyAnswer = myAnswersHistory[step] as Answer | undefined;
-    const currentResult = currentMyAnswer?.correct;
     const displayNext = Boolean(currentMyAnswer) && !lastQuiz;
     const displayLast = Boolean(currentMyAnswer) && lastQuiz;
 
@@ -77,16 +76,15 @@ function QuizContainer() {
     }
 
     return (
-        <>
-            <QuizAnswer quiz={currentQuiz} onClickAnswer={handleClickAnswer} />
-            <QuizResult currentResult={currentResult} />
+        <Layout>
+            <QuizAnswer quiz={currentQuiz} onClickAnswer={handleClickAnswer} currentAnswer={currentMyAnswer} />
             <QuizAction
                 displayNext={displayNext}
                 onClickNext={handleClickNext}
                 displayLast={displayLast}
                 onClickLast={handleClickLast}
             />
-        </>
+        </Layout>
     );
 }
 

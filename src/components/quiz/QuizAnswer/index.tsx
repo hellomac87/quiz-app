@@ -1,18 +1,19 @@
 import { useMemo } from 'react';
+import clsx from 'clsx';
 
+import { Answer } from 'src/store';
 import { Quiz } from 'src/types/quiz';
 import { suffleQuiz } from 'src/libs/quiz';
-
-import Card from 'src/components/common/Card';
 
 import styles from './QuizAnswer.module.css';
 
 type Props = {
     quiz: Quiz;
+    currentAnswer?: Answer;
     onClickAnswer(answer: string): void;
 };
 
-function QuizAnswer({ quiz, onClickAnswer }: Props) {
+function QuizAnswer({ quiz, currentAnswer, onClickAnswer }: Props) {
     const answers = useMemo(() => {
         return suffleQuiz<string>([...quiz.incorrect_answers, quiz.correct_answer]);
     }, [quiz]);
@@ -22,17 +23,39 @@ function QuizAnswer({ quiz, onClickAnswer }: Props) {
     };
 
     return (
-        <div>
-            <h1>{quiz.category}</h1>
-            <h2 className={styles.question}>{quiz.question}</h2>
+        <div className={styles.container}>
+            <h1 className={styles.question}>{quiz.question}</h1>
             <ul className={styles.answers}>
                 {answers.map((answer, index) => {
                     const number = `${index + 1}. `;
+
+                    const getCorrect = () => {
+                        const selectedIndex = currentAnswer && answers.indexOf(currentAnswer.myAnswer);
+                        if (selectedIndex !== index) return undefined;
+                        return quiz.correct_answer === currentAnswer?.myAnswer;
+                    };
+
+                    const correct = getCorrect();
+
                     return (
-                        <Card key={index} onClick={handleClickAnswer(answer)} className={styles.answer}>
-                            {number}
-                            {answer}
-                        </Card>
+                        <li
+                            key={index}
+                            onClick={handleClickAnswer(answer)}
+                            className={clsx(
+                                styles.answer,
+                                { [styles.correct]: correct === true },
+                                { [styles.incorrect]: correct === false }
+                            )}
+                        >
+                            <span>
+                                {number}
+                                {answer}
+                            </span>
+                            <span>
+                                {correct === true && '맞았어요'}
+                                {correct === false && '틀렸어요'}
+                            </span>
+                        </li>
                     );
                 })}
             </ul>
