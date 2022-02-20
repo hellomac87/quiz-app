@@ -1,0 +1,9 @@
+.container {
+    @apply inline-flex items-center justify-center bg-primary500 h-12 px-6 text-white rounded-md text-base;
+    @apply transition-all;
+    @apply hover:bg-primary700;
+}
+
+.fullWidth {
+    @apply w-full;
+}

@@ -1,7 +1,7 @@
 .container {
-    @apply flex items-center justify-center h-screen;
+    @apply flex items-center justify-center flex-col h-screen;
 }
 
-.startButton {
-    @apply cursor-pointer;
+.title {
+    @apply text-3xl font-semibold mb-[80px];
 }

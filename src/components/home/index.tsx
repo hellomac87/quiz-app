@@ -1,3 +1,5 @@
+import Button from 'src/components/common/Button';
+
 import styles from './home.module.css';
 
 type Props = {
@@ -7,9 +9,10 @@ type Props = {
 function Home({ onClick }: Props) {
     return (
         <section className={styles.container}>
-            <button className={styles.container} onClick={onClick}>
-                Start
-            </button>
+            <h1 className={styles.title}>{'퀴즈 풀기에 도전해 보세요!'}</h1>
+            <Button onClick={onClick} width={300}>
+                {'퀴즈 시작하기'}
+            </Button>
         </section>
     );
 }
