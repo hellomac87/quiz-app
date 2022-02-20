@@ -1,4 +1,5 @@
 import Card from 'src/components/common/Card';
+
 import styles from './ResultTime.module.css';
 
 type Props = {
@@ -7,9 +8,10 @@ type Props = {
 
 function ResultTime({ time }: Props) {
     return (
-        <div className={styles.container}>
-            <Card>{time}</Card>
-        </div>
+        <Card className={styles.container}>
+            <span>{'문제 푸는데 걸린 시간'}</span>
+            <span>{time}</span>
+        </Card>
     );
 }
 

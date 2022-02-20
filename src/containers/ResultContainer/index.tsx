@@ -5,17 +5,20 @@ import dayjs from 'dayjs';
 import { routes } from 'src/constants/routes';
 import { useStore } from 'src/store';
 import { ChartData } from 'src/types/result';
+import { getHHMMSSFromSeconds } from 'src/libs/result';
 
+import Layout from 'src/components/common/Layout';
 import ResultTime from 'src/components/result/ResultTime';
-import ResultCorrctAmount from 'src/components/result/ResultCorrectAmount';
+import ResultCorrectionAmount from 'src/components/result/ResultCorrectionAmount';
 import ResultChart from 'src/components/result/ResultChart';
 import ResultAction from 'src/components/result/ResultAction';
 import ResultCorrectionNote from 'src/components/result/ResultCorrectionNote';
-import { getHHMMSSFromSeconds } from 'src/libs/result';
 
 function ResultContainer() {
     const navigate = useNavigate();
-    const { myAnswersHistory, resetMyAnswerHistory, setIsRetry, startTime, endTime } = useStore((state) => state);
+    const { quizzes, myAnswersHistory, resetMyAnswerHistory, setIsRetry, startTime, endTime } = useStore(
+        (state) => state
+    );
 
     const corrections = myAnswersHistory.filter((answer) => answer.correct);
     const incorrections = myAnswersHistory.filter((answer) => !answer.correct);
@@ -50,13 +53,17 @@ function ResultContainer() {
     });
 
     return (
-        <>
+        <Layout>
             <ResultTime time={time} />
-            <ResultCorrctAmount correctAmount={corrections.length} incorrectAmount={incorrections.length} />
+            <ResultCorrectionAmount
+                total={quizzes.length}
+                correctAmount={corrections.length}
+                incorrectAmount={incorrections.length}
+            />
             <ResultChart chartData={chartData} />
             <ResultAction onClickRetry={retry} />
             <ResultCorrectionNote incorrections={incorrections} />
-        </>
+        </Layout>
     );
 }
 
