@@ -7,3 +7,8 @@
 .fullWidth {
     @apply w-full;
 }
+
+.outline {
+    @apply bg-white border border-primary300 text-primary500;
+    @apply hover:bg-primary100;
+}

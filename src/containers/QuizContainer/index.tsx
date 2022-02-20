@@ -79,7 +79,7 @@ function QuizContainer() {
 
     return (
         <Layout>
-            <QuizAnswer quiz={currentQuiz} onClickAnswer={handleClickAnswer} />
+            <QuizAnswer quiz={currentQuiz} onClickAnswer={handleClickAnswer} currentAnswer={currentMyAnswer} />
             <QuizResult currentResult={currentResult} />
             <QuizAction
                 displayNext={displayNext}

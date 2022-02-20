@@ -1,3 +1,5 @@
+import Button from 'src/components/common/Button';
+
 import styles from './QuizAction.module.css';
 
 type Props = {
@@ -16,10 +18,10 @@ function QuizAction({ displayNext, onClickNext, displayLast, onClickLast }: Prop
     }
     return (
         <div className={styles.container}>
-            <button onClick={handleClick} className={styles.button}>
+            <Button onClick={handleClick} variant={displayLast ? 'fill' : 'outline'} fullWidth>
                 {displayNext && 'Next Quiz'}
                 {displayLast && 'Show Result'}
-            </button>
+            </Button>
         </div>
     );
 }

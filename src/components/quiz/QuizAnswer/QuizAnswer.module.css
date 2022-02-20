@@ -2,14 +2,21 @@
     @apply w-full;
 }
 .question {
-    @apply w-full p-6 text-3xl text-center;
+    @apply w-full text-2xl font-medium mb-[48px];
 }
 
 .answers {
-    @apply flex flex-wrap gap-4;
+    @apply flex flex-col gap-4 mb-[80px];
 }
 
 .answer {
-    @apply flex items-center justify-center w-[calc(50%-8px)] h-[200px] cursor-pointer transition-transform;
-    @apply hover:scale-105;
+    @apply flex items-center px-6 py-4 cursor-pointer rounded-lg text-base;
+    @apply border border-gray-100;
+    @apply hover:bg-gray-100;
+}
+.correct {
+    @apply bg-green-200;
+}
+.incorrect {
+    @apply bg-red-200;
 }

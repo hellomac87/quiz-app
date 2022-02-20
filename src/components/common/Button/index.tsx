@@ -6,11 +6,16 @@ import styles from './Button.module.css';
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
     width?: number;
     fullWidth?: boolean;
+    variant?: 'fill' | 'outline';
 };
 
-function Button({ children, width, fullWidth = false, ...rest }: React.PropsWithChildren<Props>) {
+function Button({ children, width, fullWidth = false, variant = 'fill', ...rest }: React.PropsWithChildren<Props>) {
     return (
-        <button {...rest} className={clsx(styles.container, { [styles.fullWidth]: fullWidth })} style={{ width }}>
+        <button
+            {...rest}
+            className={clsx(styles.container, styles[variant], { [styles.fullWidth]: fullWidth })}
+            style={{ width }}
+        >
             {children}
         </button>
     );
