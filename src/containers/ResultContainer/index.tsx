@@ -1,5 +1,8 @@
+import { useMount } from 'react-use';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
+import { routes } from 'src/constants/routes';
 import { useStore } from 'src/store';
 import { ChartData } from 'src/types/result';
 import { getHHMMSSFromSeconds } from 'src/libs/result';
@@ -8,12 +11,10 @@ import ResultTime from 'src/components/result/ResultTime';
 import ResultCorrctAmount from 'src/components/result/ResultCorrectAmount';
 import ResultChart from 'src/components/result/ResultChart';
 import ResultAction from 'src/components/result/ResultAction';
-import { routes } from 'src/constants/routes';
-import { useMount } from 'react-use';
 
 function ResultContainer() {
     const navigate = useNavigate();
-    const { seconds, myAnswersHistory, resetMyAnswerHistory, setIsRetry } = useStore((state) => state);
+    const { myAnswersHistory, resetMyAnswerHistory, setIsRetry, startTime, endTime } = useStore((state) => state);
 
     const correctAmount = myAnswersHistory.filter((answer) => answer.correct).length;
     const incorrectAmount = myAnswersHistory.filter((answer) => !answer.correct).length;
@@ -23,7 +24,16 @@ function ResultContainer() {
         { name: 'incorrect', value: incorrectAmount },
     ];
 
-    const time = getHHMMSSFromSeconds(seconds);
+    const getDuration = (startTime: Date | null, endTime: Date | null) => {
+        if (!startTime || !endTime) {
+            return '';
+        }
+        const diffSeconds = dayjs(endTime).diff(dayjs(startTime), 's');
+
+        return dayjs(diffSeconds).format('HH:mm:ss');
+    };
+
+    const time = getDuration(startTime, endTime);
 
     const retry = () => {
         resetMyAnswerHistory();
