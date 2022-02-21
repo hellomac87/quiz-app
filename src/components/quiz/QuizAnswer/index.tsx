@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import clsx from 'clsx';
+import { decode } from 'html-entities';
 
 import { Answer } from 'src/store';
 import { Quiz } from 'src/types/quiz';
@@ -26,7 +27,7 @@ function QuizAnswer({ quiz, currentAnswer, onClickAnswer, step }: Props) {
     return (
         <div className={styles.container}>
             <h1 className={styles.question}>
-                {quiz.question}
+                {decode(quiz.question)}
                 <span className={styles.step}>{step}</span>
             </h1>
             <ul className={styles.answers}>
