@@ -1,3 +1,5 @@
+import { decode } from 'html-entities';
+
 import { Answer } from 'src/store';
 
 import Card from 'src/components/common/Card';
@@ -18,7 +20,7 @@ function ResultCorrectionNote({ incorrections }: Props) {
                     return (
                         <li key={answer.myAnswer} className={styles.item}>
                             <Card>
-                                <div className={styles.question}>{answer.question}</div>
+                                <div className={styles.question}>{decode(answer.question)}</div>
                                 <div className={styles.correctAnswer}>정답: {answer.correct_answer}</div>
                             </Card>
                         </li>
