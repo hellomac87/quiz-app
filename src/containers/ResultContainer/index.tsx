@@ -16,7 +16,7 @@ import ResultCorrectionNote from 'src/components/result/ResultCorrectionNote';
 
 function ResultContainer() {
     const navigate = useNavigate();
-    const { quizzes, myAnswersHistory, resetMyAnswerHistory, setIsRetry, startTime, endTime } = useStore(
+    const { quizzes, myAnswersHistory, resetMyAnswerHistory, resetQuizzes, setIsRetry, startTime, endTime } = useStore(
         (state) => state
     );
 
@@ -39,9 +39,15 @@ function ResultContainer() {
 
     const time = getDuration(startTime, endTime);
 
-    const retry = () => {
+    const handleClickRetry = () => {
         resetMyAnswerHistory();
         setIsRetry(true);
+        navigate(routes.quiz);
+    };
+
+    const handleClickOtherQuizzes = () => {
+        resetMyAnswerHistory();
+        resetQuizzes();
         navigate(routes.quiz);
     };
 
@@ -61,7 +67,7 @@ function ResultContainer() {
                 incorrectAmount={incorrections.length}
             />
             <ResultChart chartData={chartData} />
-            <ResultAction onClickRetry={retry} />
+            <ResultAction onClickRetry={handleClickRetry} onClickOtherQuiz={handleClickOtherQuizzes} />
             <ResultCorrectionNote incorrections={incorrections} />
         </Layout>
     );

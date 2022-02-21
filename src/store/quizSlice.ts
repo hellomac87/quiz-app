@@ -5,6 +5,7 @@ import { SetState, GetState } from 'zustand';
 export type QuizType = {
     quizzes: Quiz[];
     setQuizzes(quizzes: Quiz[]): void;
+    resetQuizzes(): void;
 };
 
 export const createQuizSlice = (set: SetState<StoreType>, get: GetState<StoreType>) => ({
@@ -13,5 +14,10 @@ export const createQuizSlice = (set: SetState<StoreType>, get: GetState<StoreTyp
         set((state: StoreType) => ({
             ...state,
             quizzes,
+        })),
+    resetQuizzes: () =>
+        set((state: StoreType) => ({
+            ...state,
+            quizzes: [],
         })),
 });

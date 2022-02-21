@@ -11,7 +11,7 @@ import Layout from 'src/components/common/Layout';
 import QuizAnswer from 'src/components/quiz/QuizAnswer';
 import QuizAction from 'src/components/quiz/QuizAction';
 
-const AMOUNT = 10;
+const AMOUNT = 5;
 
 function QuizContainer() {
     const navigate = useNavigate();
@@ -35,7 +35,6 @@ function QuizContainer() {
         };
         try {
             const res = await getQuiz(params);
-            console.log(res);
             setQuizzes(res.data.results);
         } catch (error) {
             console.error(error);
@@ -66,7 +65,7 @@ function QuizContainer() {
     };
 
     useAsync(async () => {
-        if (isRetry && quizzes.length > 0) return;
+        if (isRetry) return;
         setStartTime(new Date());
         await loadQuiz();
     });

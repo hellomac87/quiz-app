@@ -1,7 +1,8 @@
 .container {
-    @apply max-w-lg m-auto;
+    @apply max-w-lg m-auto py-[80px];
 }
 
 .header {
     @apply flex items-center h-[80px] text-4xl text-primary500 font-bold;
+    @apply max-w-lg m-auto fixed top-0 left-0 right-0;
 }

@@ -1,5 +1,5 @@
 .container {
-    @apply flex items-center justify-center flex-col h-screen;
+    @apply flex items-center justify-center flex-col h-[calc(100vh-80px)];
 }
 
 .title {
