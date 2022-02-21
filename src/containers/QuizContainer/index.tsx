@@ -12,7 +12,7 @@ import Loading from 'src/components/common/Loading';
 import QuizAnswer from 'src/components/quiz/QuizAnswer';
 import QuizAction from 'src/components/quiz/QuizAction';
 
-const AMOUNT = 5;
+const AMOUNT = 10;
 
 function QuizContainer() {
     const navigate = useNavigate();
