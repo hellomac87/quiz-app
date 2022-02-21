@@ -8,6 +8,7 @@ import { routes } from 'src/constants/routes';
 import { QuizParams } from 'src/types/quiz';
 
 import Layout from 'src/components/common/Layout';
+import Loading from 'src/components/common/Loading';
 import QuizAnswer from 'src/components/quiz/QuizAnswer';
 import QuizAction from 'src/components/quiz/QuizAction';
 
@@ -18,11 +19,11 @@ function QuizContainer() {
     const { quizzes, setQuizzes, myAnswersHistory, setMyAnswersHistory, isRetry, setStartTime, setEndTime } = useStore(
         (state) => state
     );
-    const [step, setStep] = useState(0);
+    const [stepIndex, setStepIndex] = useState(0);
 
-    const lastQuiz = step === AMOUNT - 1;
-    const currentQuiz = quizzes?.[step];
-    const currentMyAnswer = myAnswersHistory[step] as Answer | undefined;
+    const lastQuiz = stepIndex === AMOUNT - 1;
+    const currentQuiz = quizzes?.[stepIndex];
+    const currentMyAnswer = myAnswersHistory[stepIndex] as Answer | undefined;
     const displayNext = Boolean(currentMyAnswer) && !lastQuiz;
     const displayLast = Boolean(currentMyAnswer) && lastQuiz;
 
@@ -57,7 +58,7 @@ function QuizContainer() {
     };
 
     const handleClickNext = () => {
-        setStep(step + 1);
+        setStepIndex(stepIndex + 1);
     };
 
     const handleClickLast = () => {
@@ -70,19 +71,25 @@ function QuizContainer() {
         await loadQuiz();
     });
 
-    if (!currentQuiz) {
-        return <div>loading quiz...</div>;
-    }
-
     return (
         <Layout>
-            <QuizAnswer quiz={currentQuiz} onClickAnswer={handleClickAnswer} currentAnswer={currentMyAnswer} />
-            <QuizAction
-                displayNext={displayNext}
-                onClickNext={handleClickNext}
-                displayLast={displayLast}
-                onClickLast={handleClickLast}
-            />
+            {!currentQuiz && <Loading message={'문제를 불러오는 중이에요'} />}
+            {currentQuiz && (
+                <>
+                    <QuizAnswer
+                        quiz={currentQuiz}
+                        onClickAnswer={handleClickAnswer}
+                        currentAnswer={currentMyAnswer}
+                        step={`(${stepIndex + 1}/${quizzes.length})`}
+                    />
+                    <QuizAction
+                        displayNext={displayNext}
+                        onClickNext={handleClickNext}
+                        displayLast={displayLast}
+                        onClickLast={handleClickLast}
+                    />
+                </>
+            )}
         </Layout>
     );
 }

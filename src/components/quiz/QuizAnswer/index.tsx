@@ -11,9 +11,10 @@ type Props = {
     quiz: Quiz;
     currentAnswer?: Answer;
     onClickAnswer(answer: string): void;
+    step: string;
 };
 
-function QuizAnswer({ quiz, currentAnswer, onClickAnswer }: Props) {
+function QuizAnswer({ quiz, currentAnswer, onClickAnswer, step }: Props) {
     const answers = useMemo(() => {
         return suffleQuiz<string>([...quiz.incorrect_answers, quiz.correct_answer]);
     }, [quiz]);
@@ -24,7 +25,10 @@ function QuizAnswer({ quiz, currentAnswer, onClickAnswer }: Props) {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.question}>{quiz.question}</h1>
+            <h1 className={styles.question}>
+                {quiz.question}
+                <span className={styles.step}>{step}</span>
+            </h1>
             <ul className={styles.answers}>
                 {answers.map((answer, index) => {
                     const number = `${index + 1}. `;
