@@ -3,10 +3,11 @@ import clsx from 'clsx';
 import { decode } from 'html-entities';
 
 import { Answer } from 'src/store';
-import { Quiz } from 'src/types/quiz';
+import { AnswerResult, Quiz } from 'src/types/quiz';
 import { suffleQuiz } from 'src/libs/quiz';
 
 import styles from './QuizAnswer.module.css';
+import QuizAnswerItem from '../QuizAnswerItem';
 
 type Props = {
     quiz: Quiz;
@@ -36,31 +37,27 @@ function QuizAnswer({ quiz, currentAnswer, onClickAnswer, step }: Props) {
 
                     const getCorrect = () => {
                         const selectedIndex = currentAnswer && answers.indexOf(currentAnswer.myAnswer);
-                        if (selectedIndex !== index) return undefined;
-                        return quiz.correct_answer === currentAnswer?.myAnswer;
+                        if (selectedIndex !== index) return AnswerResult.NONE;
+                        return quiz.correct_answer === currentAnswer?.myAnswer
+                            ? AnswerResult.CORRECT
+                            : AnswerResult.INCORRECT;
                     };
 
                     const correct = getCorrect();
 
                     return (
-                        <li
+                        <QuizAnswerItem
                             key={index}
                             onClick={handleClickAnswer(answer)}
                             className={clsx(
                                 styles.answer,
-                                { [styles.correct]: correct === true },
-                                { [styles.incorrect]: correct === false }
+                                { [styles.correct]: correct === AnswerResult.CORRECT },
+                                { [styles.incorrect]: correct === AnswerResult.INCORRECT }
                             )}
-                        >
-                            <span>
-                                {number}
-                                {answer}
-                            </span>
-                            <span>
-                                {correct === true && '맞았어요'}
-                                {correct === false && '틀렸어요'}
-                            </span>
-                        </li>
+                            number={number}
+                            answer={answer}
+                            correct={correct}
+                        />
                     );
                 })}
             </ul>
