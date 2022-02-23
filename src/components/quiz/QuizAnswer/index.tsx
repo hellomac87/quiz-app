@@ -49,11 +49,6 @@ function QuizAnswer({ quiz, currentAnswer, onClickAnswer, step }: Props) {
                         <QuizAnswerItem
                             key={index}
                             onClick={handleClickAnswer(answer)}
-                            className={clsx(
-                                styles.answer,
-                                { [styles.correct]: correct === AnswerResult.CORRECT },
-                                { [styles.incorrect]: correct === AnswerResult.INCORRECT }
-                            )}
                             number={number}
                             answer={answer}
                             correct={correct}
