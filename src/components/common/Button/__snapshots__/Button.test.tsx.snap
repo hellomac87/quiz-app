@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button render test snapshot en 1`] = `
+exports[`Button test snapshot: no Props 1`] = `
 <button
   className="container fill"
   style={
@@ -13,20 +13,7 @@ exports[`Button render test snapshot en 1`] = `
 </button>
 `;
 
-exports[`Button render test snapshot: no Props 1`] = `
-<button
-  className="container fill"
-  style={
-    Object {
-      "width": undefined,
-    }
-  }
->
-  Button
-</button>
-`;
-
-exports[`Button render test snapshot: onClick 1`] = `
+exports[`Button test snapshot: onClick 1`] = `
 <button
   className="container fill"
   onClick={[Function]}

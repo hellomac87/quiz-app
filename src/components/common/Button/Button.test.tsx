@@ -6,7 +6,7 @@ const onClick = () => {
     console.log('onClick');
 };
 
-describe('Button render test', () => {
+describe('Button test', () => {
     test('snapshot: no Props', () => {
         const tree = renderer.create(<Button>Button</Button>).toJSON();
         expect(tree).toMatchSnapshot();
