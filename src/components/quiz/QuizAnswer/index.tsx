@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import clsx from 'clsx';
 import { decode } from 'html-entities';
 
 import { Answer } from 'src/store';
