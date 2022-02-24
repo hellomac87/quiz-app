@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QuizAnswerItem test snapshot: correct 1`] = `
+<li
+  className="container correct"
+  onClick={[Function]}
+>
+  <span>
+    Is it correct to write test code like this?
+  </span>
+  <span>
+    맞았어요
+  </span>
+</li>
+`;
+
+exports[`QuizAnswerItem test snapshot: incorrect 1`] = `
+<li
+  className="container incorrect"
+  onClick={[Function]}
+>
+  <span>
+    Is it correct to write test code like this?
+  </span>
+  <span>
+    틀렸어요
+  </span>
+</li>
+`;
+
+exports[`QuizAnswerItem test snapshot: none 1`] = `
+<li
+  className="container"
+  onClick={[Function]}
+>
+  <span>
+    Is it correct to write test code like this?
+  </span>
+  <span />
+</li>
+`;
