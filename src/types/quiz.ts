@@ -22,3 +22,9 @@ export type QuizParams = {
     difficulty: 'easy';
     type: 'multiple';
 };
+
+export enum AnswerResult {
+    CORRECT = 'correct',
+    INCORRECT = 'incorrect',
+    NONE = 'none',
+}
