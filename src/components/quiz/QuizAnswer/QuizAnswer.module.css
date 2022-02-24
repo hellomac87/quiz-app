@@ -1,0 +1,14 @@
+.container {
+    @apply w-full mt-10;
+}
+.question {
+    @apply w-full text-2xl font-medium mb-[48px];
+}
+
+.step {
+    @apply text-sm text-gray-400;
+}
+
+.answers {
+    @apply flex flex-col gap-4 mb-[80px];
+}

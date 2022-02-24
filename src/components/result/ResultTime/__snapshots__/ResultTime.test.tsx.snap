@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultTime test snapshot: no Props 1`] = `
+<div
+  className="container container"
+>
+  <span>
+    문제 푸는데 걸린 시간
+  </span>
+  <span>
+    time
+  </span>
+</div>
+`;

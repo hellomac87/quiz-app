@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button test snapshot: no Props 1`] = `
+<button
+  className="container fill"
+  style={
+    Object {
+      "width": undefined,
+    }
+  }
+>
+  Button
+</button>
+`;
+
+exports[`Button test snapshot: onClick 1`] = `
+<button
+  className="container fill"
+  onClick={[Function]}
+  style={
+    Object {
+      "width": undefined,
+    }
+  }
+>
+  Button
+</button>
+`;

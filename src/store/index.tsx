@@ -1,15 +1,31 @@
 import create from 'zustand';
 
-export type ThemeType = 'dark' | 'light' | 'system';
+import { createMyAnswerSlice, MyAnswerType } from 'src/store/mySlice';
+import { createQuizSlice, QuizType } from 'src/store/quizSlice';
+import { createResultSlice, ResultType } from './resultSlice';
 
-export type GlobalStateType = {
-    theme: ThemeType;
-    setTheme(theme: ThemeType): void;
+export type Answer = {
+    myAnswer: string;
+    correct_answer: string;
+    correct: boolean;
+    question: string;
 };
 
-const defaultTheme: ThemeType = 'dark';
+export type StoreType = {
+    isRetry: boolean;
+    setIsRetry(flag: boolean): void;
+} & MyAnswerType &
+    QuizType &
+    ResultType;
 
-export const useStore = create<GlobalStateType>((set) => ({
-    theme: defaultTheme,
-    setTheme: (theme: ThemeType) => set((_) => ({ theme })),
+export const useStore = create<StoreType>((set, get) => ({
+    ...createQuizSlice(set, get),
+    ...createMyAnswerSlice(set, get),
+    ...createResultSlice(set, get),
+    isRetry: false,
+    setIsRetry: (flag: boolean) =>
+        set((state) => ({
+            ...state,
+            isRetry: flag,
+        })),
 }));

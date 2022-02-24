@@ -1,0 +1,7 @@
+.container {
+    @apply flex items-center justify-center flex-col my-[100px];
+}
+
+.message {
+    @apply w-full text-base mt-4 text-center;
+}

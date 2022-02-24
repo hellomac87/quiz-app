@@ -1,0 +1,23 @@
+.container {
+    @apply w-full;
+}
+
+.title {
+    @apply text-2xl font-medium mb-10;
+}
+
+.list {
+    @apply w-full text-sm;
+}
+
+.item {
+    @apply mb-4 last:mb-0;
+}
+
+.question {
+    @apply mb-2;
+}
+
+.correctAnswer {
+    @apply text-primary500;
+}
